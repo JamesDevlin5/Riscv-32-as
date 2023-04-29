@@ -44,7 +44,7 @@ void init_parser_state() {
 void print_labels() {
     struct label_list *curr = ps.labels;
     while (curr) {
-        printf("(%zu): %s\n", curr->lab->posn, curr->lab->name);
+        printf("(%08zu): %s\n", curr->lab->posn, curr->lab->name);
         curr = curr->next;
     }
 }
@@ -438,11 +438,16 @@ unsigned int emit(struct post_instruction *instr) {
 void pr_instrs() {
     struct post_instr_list *list = ps.instrs.post_instrs;
     bool dbg = true;
+    if (dbg) {
+        printf("Labels:\n");
+        print_labels();
+        printf("\n");
+    }
     int i = 1;
     while (list) {
         int out = emit(list->instr);
         if (dbg) {
-            printf("(%d): %08x\n", i, out);
+            printf("(%4d): %08x\n", i, out);
         } else {
             printf("%08x\n", out);
         }

@@ -35,6 +35,9 @@ struct label_list {
 /* Adds a parsed label name to the label list */
 void add_label(char *name);
 
+/* Prints all labels scanned & their byte position */
+void print_labels();
+
 /* Linked-list of all instructions in a parse */
 struct pre_instr_list {
     struct pre_instruction *instr;
