@@ -21,6 +21,14 @@ int get_offset(size_t instr_posn, char *label) {
 }
 
 int get_addr(char *label) {
+    struct label_list *curr = ps.labels;
+    while (curr) {
+        if (strcmp(label, curr->lab->name) == 0) {
+            return (int) curr->lab->posn;
+        }
+        curr = curr->next;
+    }
+    yyerror("could not find label %s", label);
     return 0;
 }
 
