@@ -2,6 +2,8 @@
 
 Accepts a RISC-V assembly program as input and converts it into an assembled binary executable.
 
+![Example Usage](example.png)
+
 ## Stages
 
 1. Lexing - Break the input string of characters into lexical tokens
