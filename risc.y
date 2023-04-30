@@ -262,14 +262,30 @@ int main(int argc, char *argv[]) {
                 optlvl = 3;
                 break;
             default:
-                fprintf(stderr, "Usage: %s [-v] [-O] [file...]\n", argv[0]);
+                fprintf(stderr, "Usage: %s [-v] [-O] [file(s)...]\n", argv[0]);
                 exit(EXIT_FAILURE);
         }
     }
 
+    if (optind == argc) {
+        fprintf(stderr, "No input files given! Exiting...\n");
+        return 0;
+    }
+
     init_parser_state();
 
-    yyparse();
+    for(int optidx = optind; optidx < argc; optidx++) {
+        FILE *f = fopen(argv[optidx], "r");
+        if (!f) {
+            fprintf(stderr, "Could not open file: %s\n", argv[optidx]);
+            return 1;
+        }
+
+        yyrestart(f);
+        yylineno = 1;
+        yyparse();
+        fclose(f);
+    }
 
     fix_instrs();
     pr_instrs();
