@@ -6,6 +6,8 @@
     // Arg parsing
     #include <unistd.h>
     extern bool DEBUG;
+    // Optimizations
+    extern size_t optlvl;
 %}
 
 %start start
@@ -226,7 +228,9 @@ stmt: r_ins REG ',' REG ',' REG { add_r_instr($1, $2, $4, $6); }
     }
     | NOP {
         /* addi x0, x0, 0 */
-        add_i_instr(ADDI, 0, 0, 0);
+        if (optlvl < 1) {
+            add_i_instr(ADDI, 0, 0, 0);
+        }
     }
     ;
 
@@ -249,13 +253,16 @@ start:                  /* Empty */
 int main(int argc, char *argv[]) {
     // Parse CLI args
     int opt;
-    while ((opt = getopt(argc, argv, "v")) != -1) {
+    while ((opt = getopt(argc, argv, "Ov")) != -1) {
         switch (opt) {
             case 'v':
                 DEBUG = true;
                 break;
+            case 'O':
+                optlvl = 3;
+                break;
             default:
-                fprintf(stderr, "Usage: %s [-v] [file...]\n", argv[0]);
+                fprintf(stderr, "Usage: %s [-v] [-O] [file...]\n", argv[0]);
                 exit(EXIT_FAILURE);
         }
     }

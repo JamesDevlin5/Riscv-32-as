@@ -2,6 +2,7 @@
 
 struct parser_state ps;
 bool DEBUG;
+size_t optlvl = 0;
 
 void yyerror(char *s, ...) {
     va_list args;
