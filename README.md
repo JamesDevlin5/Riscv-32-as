@@ -2,7 +2,7 @@
 
 Accepts a RISC-V assembly program as input and converts it into an assembled binary executable.
 
-![Example Usage](example.png)
+![Example Usage](examples/example.png)
 
 
 The assembler includes the header file `unistd.h`, and uses POSIX `getopt` for

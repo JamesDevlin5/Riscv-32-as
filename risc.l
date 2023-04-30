@@ -11,8 +11,8 @@
 DIGIT        [0-9]
 HEXDIGIT     [0-9aAbBcCdDeEfF]
 BINDIGIT     [01]
-LABELHEAD    [a-zA-Z0-9]
-LABELBODY    [-_a-zA-Z0-9]
+LABELHEAD    [a-zA-Z0-9.]
+LABELBODY    [-_a-zA-Z0-9.]
 WS           [ \t\r]
 
 %%
