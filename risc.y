@@ -2,6 +2,10 @@
 %{
     #include "risc.tab.h"
     #include "risc_common.h"
+
+    // Arg parsing
+    #include <unistd.h>
+    extern bool DEBUG;
 %}
 
 %start start
@@ -242,7 +246,20 @@ start:                  /* Empty */
 
 %%
 
-int main() {
+int main(int argc, char *argv[]) {
+    // Parse CLI args
+    int opt;
+    while ((opt = getopt(argc, argv, "v")) != -1) {
+        switch (opt) {
+            case 'v':
+                DEBUG = true;
+                break;
+            default:
+                fprintf(stderr, "Usage: %s [-v] [file...]\n", argv[0]);
+                exit(EXIT_FAILURE);
+        }
+    }
+
     init_parser_state();
 
     yyparse();

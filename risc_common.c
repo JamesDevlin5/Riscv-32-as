@@ -1,6 +1,7 @@
 #include "risc_common.h"
 
 struct parser_state ps;
+bool DEBUG;
 
 void yyerror(char *s, ...) {
     va_list args;
@@ -445,8 +446,7 @@ unsigned int emit(struct post_instruction *instr) {
 
 void pr_instrs() {
     struct post_instr_list *list = ps.instrs.post_instrs;
-    bool dbg = true;
-    if (dbg) {
+    if (DEBUG) {
         printf("Labels:\n");
         print_labels();
         printf("\n");
@@ -454,7 +454,7 @@ void pr_instrs() {
     int i = 1;
     while (list) {
         int out = emit(list->instr);
-        if (dbg) {
+        if (DEBUG) {
             printf("(%4d): %08x\n", i, out);
         } else {
             printf("%08x\n", out);
