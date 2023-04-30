@@ -4,6 +4,10 @@ Accepts a RISC-V assembly program as input and converts it into an assembled bin
 
 ![Example Usage](example.png)
 
+
+The assembler includes the header file `unistd.h`, and uses POSIX `getopt` for
+parsing CLI arguments.
+
 ## Stages
 
 1. Lexing - Break the input string of characters into lexical tokens
@@ -13,6 +17,15 @@ Accepts a RISC-V assembly program as input and converts it into an assembled bin
 1. First Pass - Reverse the list produced by the parser and calculate any label
    offsets
 1. Second Pass - Emit the compiled binary instructions
+
+## Debug Mode
+
+Give the assembler the `-v` flag when invoking it and it will print extra
+debugging information, such as the symbol table and the line number of each
+generated instruction.
+
+The intent is that a person will be reading this output, so it should be
+pretty-printed.
 
 ## TODO
 

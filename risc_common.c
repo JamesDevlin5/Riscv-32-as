@@ -52,9 +52,14 @@ void init_parser_state() {
 
 void print_labels() {
     struct label_list *curr = ps.labels;
-    while (curr) {
-        printf("(%08zu): %s\n", curr->lab->posn, curr->lab->name);
-        curr = curr->next;
+    if (!curr) {
+        printf("    <none>\n");
+    }
+    else {
+        while (curr) {
+            printf("(%08zu): %s\n", curr->lab->posn, curr->lab->name);
+            curr = curr->next;
+        }
     }
 }
 
