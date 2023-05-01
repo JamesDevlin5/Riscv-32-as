@@ -10,6 +10,7 @@
 
 DIGIT        [0-9]
 HEXDIGIT     [0-9aAbBcCdDeEfF]
+OCTDIGIT     [0-7]
 BINDIGIT     [01]
 LABELHEAD    [a-zA-Z0-9.]
 LABELBODY    [-_a-zA-Z0-9.]
@@ -169,6 +170,14 @@ WS           [ \t\r]
 "0"[xX]{HEXDIGIT}+ {
     /* Hexadecimal integer literal */
     long int val = strtol(yytext + 2, NULL, 16);
+    // TODO: check that value is within range
+    yylval.numval = (int) val;
+    return NUMBER;
+}
+
+"0"[oO]{OCTDIGIT}+ {
+    /* Octadecimal integer literal */
+    long int val = strtol(yytext + 2, NULL, 8);
     // TODO: check that value is within range
     yylval.numval = (int) val;
     return NUMBER;
