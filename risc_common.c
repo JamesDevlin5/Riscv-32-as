@@ -349,6 +349,36 @@ unsigned int emit(struct post_instruction *instr) {
                     fn3 = 5;
                     imm = 0x400;
                     break;
+                case SLTI:
+                    fn3 = 2;
+                    break;
+                case SLTIU:
+                    fn3 = 3;
+                    break;
+                case JALR:
+                    fn3 = 0;
+                    opcode = 0x67;
+                    break;
+                case LB:
+                    fn3 = 0;
+                    opcode = 3;
+                    break;
+                case LH:
+                    fn3 = 1;
+                    opcode = 3;
+                    break;
+                case LW:
+                    fn3 = 2;
+                    opcode = 3;
+                    break;
+                case LBU:
+                    fn3 = 4;
+                    opcode = 3;
+                    break;
+                case LHU:
+                    fn3 = 5;
+                    opcode = 3;
+                    break;
                 default:
                     yyerror("attempting to parse non i-type as i-type");
             }
