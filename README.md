@@ -35,14 +35,15 @@ Optimizations performed:
 
 - `nop` can be skipped entirely
 
-### Number Formats
+## Number Formats
 
 Various number literal formats are recognized, including:
 
 - Decimal (*default*)
-  - Character literals, such as `'a'`, are recognized as their ASCII int values
-  - Hexadecimal numbers are prefixed by `0x` (or `0X`), such as `0xF123`
-  - Binary numbers are prefixed by `0b` (or `0B`), such as `0b10101010`
+- Character literals, such as `'a'`, are recognized as their ASCII int values
+- Hexadecimal numbers are prefixed by `0x` (or `0X`), such as `0xF123`
+- Octal numbers are prefixed by `0o` (or `0O`), such as `0o70123`
+- Binary numbers are prefixed by `0b` (or `0B`), such as `0b10101010`
 
 ## Pseudo Instructions
 
